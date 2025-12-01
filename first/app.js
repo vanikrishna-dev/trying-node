@@ -14,7 +14,7 @@ const requestHandler = (req, res) => {
     </head>
     <body>
     <center>
-        <h1> Product Search </h1>
+        <h1> This is Node trial page </h1>
     <center>
     <p> Trying node for the first time </p>
     </body>

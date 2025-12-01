@@ -8,17 +8,26 @@ const requestHandler = (req, res) => {
   res.setHeader('Content-type', 'text/html');
   res.write(`
     <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <title>Node</title>
-    </head>
-    <body>
-    <center>
-        <h1> This is Node trial page </h1>
-    <center>
-    <p> Trying node for the first time </p>
-    </body>
-    </html>
+      <html lang="en">
+      <head>
+          <title>Product Search</title>
+      </head>
+      <body>
+          <center>
+              <h1> Product Search </h1>
+          <center>
+          <p> Searching for the required products </p>
+          <form action="/products">
+              <input type="text" placeholder="Name of the product">
+              <br>
+              <br>
+              <input type="text" placeholder="Enter your budget">
+              <br>
+              <br>
+              <input type="submit">
+          </form>
+      </body>
+      </html>
     `);
     res.end();
 };
