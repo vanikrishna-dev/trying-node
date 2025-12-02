@@ -18,11 +18,11 @@ const requestHandler = (req, res) => {
                 <h1> Product Search </h1>
             <center>
             <p> Searching for the required products </p>
-            <form action="/products">
-                <input type="text" placeholder="Name of the product">
+            <form action="/buy-products" method="POST">
+                <input type="text" name="Product" placeholder="Name of the product">
                 <br>
                 <br>
-                <input type="text" placeholder="Enter your budget">
+                <input type="text" name="Budget" placeholder="Enter your budget">
                 <br>
                 <br>
                 <input type="submit">
@@ -31,7 +31,7 @@ const requestHandler = (req, res) => {
         </html>
       `);
   }
-  else if (req.url === "/products?"){
+  else if (req.url === "/products"){
     res.write(`
       <!DOCTYPE html>
         <html lang="en">
@@ -47,7 +47,13 @@ const requestHandler = (req, res) => {
         </html>
       `);
   }
-  else{
+  else if ((req.url === "/buy-products" || req.url === "/buy-products?") && req.method === "POST") {
+    console.log("Product info received");
+    res.statusCode = 302;
+    res.setHeader('Location', '/products')
+  }
+  else {
+    res.statusCode = 404;
     res.write(`
       <!DOCTYPE html>
         <html lang="en">
