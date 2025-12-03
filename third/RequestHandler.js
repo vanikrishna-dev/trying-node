@@ -30,7 +30,7 @@ const RequestHandler = (req, res) => {
         </html>
       `);
 
-    res.end();
+    res.end(); 
   }
   else if (req.url === "/products"){
     res.write(`
@@ -66,13 +66,14 @@ const RequestHandler = (req, res) => {
       for(const [key, value] of urlParams.entries()){
         productsJson[key] = value;
       }
-      fs.writeFileSync('buy.txt', JSON.stringify(productsJson));
+      fs.writeFile ('buy.txt', JSON.stringify(productsJson), (err) => {
+        res.statusCode = 302;
+        res.setHeader('Location', '/products');
+        res.end();
+        console.log("Data received");
+      });
     });
 
-    res.statusCode = 302;
-    res.setHeader('Location', '/products');
-    res.end();
-    console.log("Data received");
   }
   else {
     res.statusCode = 404;
