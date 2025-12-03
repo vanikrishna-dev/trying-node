@@ -1,5 +1,6 @@
 const http = require("http");
 const fs = require("fs");
+const { URLSearchParams } = require("url");
 
 console.log("I have made a request");
 
@@ -59,10 +60,14 @@ const requestHandler = (req, res) => {
 
     req.on("end", () => {
       const productData = Buffer.concat(productArr).toString();
-      console.log(productData);
-    })
+      const urlParams = new URLSearchParams(productData);
+      const productsJson = {};
+      for(const [key, value] of urlParams.entries()){
+        productsJson[key] = value;
+      }
+      fs.writeFileSync('buy.txt', JSON.stringify(productsJson));
+    });
 
-    fs.writeFileSync('buy.txt', 'Products App');
     res.statusCode = 302;
     res.setHeader('Location', '/products');
   }
