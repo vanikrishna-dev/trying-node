@@ -29,6 +29,8 @@ const RequestHandler = (req, res) => {
         </body>
         </html>
       `);
+
+    res.end();
   }
   else if (req.url === "/products"){
     res.write(`
@@ -45,6 +47,8 @@ const RequestHandler = (req, res) => {
         </body>
         </html>
       `);
+
+    res.end();
   }
   else if ((req.url === "/buy-products" || req.url === "/buy-products?") && req.method === "POST") {
     console.log("Product info received");
@@ -67,6 +71,8 @@ const RequestHandler = (req, res) => {
 
     res.statusCode = 302;
     res.setHeader('Location', '/products');
+    res.end();
+    console.log("Data received");
   }
   else {
     res.statusCode = 404;
@@ -81,9 +87,9 @@ const RequestHandler = (req, res) => {
         </body>
         </html>
       `);
-  }
 
     res.end();
+  }
 };
 
 module.exports = RequestHandler;
