@@ -50,6 +50,18 @@ const requestHandler = (req, res) => {
   }
   else if ((req.url === "/buy-products" || req.url === "/buy-products?") && req.method === "POST") {
     console.log("Product info received");
+
+    const productArr = [];
+    req.on("data", (chunk) => {
+        console.log(chunk);
+        productArr.push(chunk);
+    });
+
+    req.on("end", () => {
+      const productData = Buffer.concat(productArr).toString();
+      console.log(productData);
+    })
+
     fs.writeFileSync('buy.txt', 'Products App');
     res.statusCode = 302;
     res.setHeader('Location', '/products');
@@ -60,7 +72,7 @@ const requestHandler = (req, res) => {
       <!DOCTYPE html>
         <html lang="en">
         <head>
-            <title>Product Search</title>
+            <title>Error</title>
         </head>
         <body>
               <h1> 404 Page Not Found </h1>
