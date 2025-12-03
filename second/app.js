@@ -1,4 +1,5 @@
 const http = require("http");
+const fs = require("fs");
 
 console.log("I have made a request");
 
@@ -49,8 +50,9 @@ const requestHandler = (req, res) => {
   }
   else if ((req.url === "/buy-products" || req.url === "/buy-products?") && req.method === "POST") {
     console.log("Product info received");
+    fs.writeFileSync('buy.txt', 'Products App');
     res.statusCode = 302;
-    res.setHeader('Location', '/products')
+    res.setHeader('Location', '/products');
   }
   else {
     res.statusCode = 404;
